@@ -1,5 +1,6 @@
-name : basic GHA pipeline
-on: 
+name: basic GHA pipeline
+
+on:
   push:
     branches: ["main"]
 
