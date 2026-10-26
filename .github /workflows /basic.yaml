@@ -7,5 +7,5 @@ name : basic GHA pipeline
     basic_job:
       runs-on: ubuntu-26.04
       steps:
-        -name: basic
+        - name: basic
          run: echo "simple GHA Pipeline for learing"
