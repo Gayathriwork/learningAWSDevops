@@ -8,10 +8,10 @@ on:
         environment:
           description: "select the enviornment to run"
           required: true
-          default: "developement"
+          default: "development"
           type: choice
           options:
-            - developemnent
+            - development
             - production
         port:
          description: "select the port to run"
