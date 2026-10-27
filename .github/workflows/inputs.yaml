@@ -46,10 +46,10 @@ jobs:
           
       - name: Run an application
         run: |
-          node app.js ${{github.event.inputs.environment}} & 
+          node app.js ${{ github.event.inputs.environment }} & 
           sleep 5
-          curl http://localhost:${{github.event.inputs.port}}
-          curl http://localhost:${{github.event.inputs.port}}/health
-          pkill -f node "app.js"
+          curl http://localhost:${{ github.event.inputs.port }}
+          curl http://localhost:${{ github.event.inputs.port }}/health
+          pkill -f "node app.js"
 
   
