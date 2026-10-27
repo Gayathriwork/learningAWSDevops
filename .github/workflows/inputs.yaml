@@ -6,7 +6,7 @@ on:
   workflow_dispatch: 
     inputs:
         environment:
-          description: "select the enviornment to run"
+          description: "select the environment to run"
           required: true
           default: "development"
           type: choice
@@ -20,7 +20,7 @@ on:
          type: choice
          options:
            - 8080
-           - 5000
+           - 5001
 jobs:
   inputjob:
     runs-on: mac
@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "PORT=8080" >> .env.development
           echo "APP=GHA_DEVELOPMENT_NODE_APP" >> .env.development
-          echo "PORT=5000" >> .env.production
+          echo "PORT=5001" >> .env.production
           echo "APP=GHA_PRODUCTION_NODE_APP" >> .env.production
           
       - name: run the application
