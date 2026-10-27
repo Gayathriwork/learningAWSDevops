@@ -24,7 +24,7 @@ on:
 jobs:
   inputjob:
     runs-on: mac
-    environment: prod
+    environment: ${{  github.ref_name == 'main' && 'prod' || 'dev' }}
 
     steps:
       - name: Code Clone
@@ -40,10 +40,13 @@ jobs:
         
       - name: create .env files
         run: |
-          echo "PORT=8080" >> .env.development
-          echo "APP=GHA_DEVELOPMENT_NODE_APP" >> .env.development
-          echo "PORT=5001" >> .env.production
-          echo "APP=GHA_PRODUCTION_NODE_APP" >> .env.production
+          if [[ "${{ github.event.inputs.environment }}" == "development ]]; then
+            echo "PORT=8080" >> .env.development
+            echo "APP=GHA_DEVELOPMENT_NODE_APP" >> .env.development
+          else 
+            echo "PORT=5001" >> .env.production
+            echo "APP=GHA_PRODUCTION_NODE_APP" >> .env.production
+          fi
           
       - name: run the application
         run: |
