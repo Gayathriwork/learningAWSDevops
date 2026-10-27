@@ -1,0 +1,30 @@
+name: Node Basic Pipeline
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch: 
+
+jobs:
+  nodeapp:
+    runs-on: mac
+
+    steps:
+      -name: Clone Code
+       uses: actions/checkout@v7
+       
+      -name: setup node
+       uses: actions/setup-node@v7
+       with:
+        node-version: 24
+        
+      -name: Install dependencies
+       run: npm install
+       
+      -name: run the application
+       run: |
+         node app.js &
+         sleep 5
+         curl https://localhost:8080
+         curl https://localhost:8080/health
+         pkill -f node "app.js"
