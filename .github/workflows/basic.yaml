@@ -5,7 +5,7 @@ on:
 
 jobs:
   basicjob:
-    runs-on: ubuntu-latest
+    runs-on:  mac
     steps:
       - name: basic
         run: echo "simple GHA Pipeline for learning"
