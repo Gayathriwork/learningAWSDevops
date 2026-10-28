@@ -13,10 +13,10 @@ jobs:
       - name: code clone
         uses: actions/checkout@v7
       - name: Sonarqube Analysis
-        uses: onarSource/sonarqube-scan-action@v8
-  with:
-    args: >
-      -Dsonar.projectKey=NodeAPP
-      -Dsonar.sources=.
-      -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
-      -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        uses: SonarSource/sonarqube-scan-action@v8
+        with:
+          args: >
+            -Dsonar.projectKey=NodeAPP
+            -Dsonar.sources=.
+            -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
