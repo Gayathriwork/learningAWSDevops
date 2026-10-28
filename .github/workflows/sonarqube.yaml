@@ -1,0 +1,23 @@
+name: sonarqube pipeline
+
+on:
+  pull_request: 
+    branches: ["main"]
+  workflow_dispatch: 
+
+jobs:
+  sonarqube:
+    runs-on: mac
+
+    steps:
+      - name: code clone
+        uses: actions/checkout@v7
+      - name: Sonarqube Analysis
+        uses: onarSource/sonarqube-scan-action@v8
+  with:
+    projectBaseDir: app/src
+    args: >
+      -Dsonar.projectKey=NodeAPP
+      -Dsonar.sources=.
+      -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
+      -Dsonar.token=${{ secrets.SONAR_TOKEN }}
