@@ -15,7 +15,6 @@ jobs:
       - name: Sonarqube Analysis
         uses: onarSource/sonarqube-scan-action@v8
   with:
-    projectBaseDir: app/src
     args: >
       -Dsonar.projectKey=NodeAPP
       -Dsonar.sources=.
