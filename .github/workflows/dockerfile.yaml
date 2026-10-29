@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Docker image build
-        run: docker build-f Dockerfile.distroless -t distrolessNodeApp .
+        run: docker build -f Dockerfile.distroless -t distrolessNodeApp .
 
       - name: Tag and push a Docker image
         run: |
