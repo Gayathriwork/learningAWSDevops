@@ -25,7 +25,7 @@ jobs:
       - name: Tag and push a Docker image
         run: |
           SHORT_SHA=${GITHUB_SHA::7}
-          docker tag distrolessNodeApp ${{ vars.DOCKERHUB_USERNAME }}/nodeapp:$SHORT_SHA
+          docker tag distrolessnodeapp ${{ vars.DOCKERHUB_USERNAME }}/nodeapp:$SHORT_SHA
           docker push ${{ vars.DOCKERHUB_USERNAME }}/nodeapp:$SHORT_SHA
       
 
