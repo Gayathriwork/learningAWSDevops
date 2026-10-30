@@ -39,7 +39,7 @@ jobs:
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-          Dockerfile_name: distrolessnodeapp
+          Dockerfile_name: Dockerfile.distroless
           Dockerhub_repo: nodeapp
 
       
