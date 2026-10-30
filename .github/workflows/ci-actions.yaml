@@ -1,0 +1,45 @@
+name: CI Action pipeline
+
+on:
+  push:
+    branches: ["main"]
+  pull_request: 
+    branches: ["main"]
+  workflow_dispatch: 
+
+jobs:
+  sonarqube:
+    runs-on: mac
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - name: code clone
+        uses: actions/checkout@v7
+        
+      - name: Sonarqube Analysis
+        uses: SonarSource/sonarqube-scan-action@v8
+        with:
+          args: >
+            -Dsonar.projectKey=NodeAPP
+            -Dsonar.sources=.
+            -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
+            -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+            -Dsonar.qualitygate.wait=true
+            
+  Dockerimagebuild:
+    runs-on: mac
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment: ${{  github.ref_name == 'main' && 'prod' || 'dev' }}
+
+    steps:
+      - name: clone a code
+        uses: actions/checkout@v7
+      - name: Login build and push to dockerhub
+        uses: Gayathriwork/learningAWSDevops/.github/actions/docker-build-push@main
+        with:
+          username:${{ vars.DOCKERHUB_USERNAME }}
+          password:${{ secrets.DOCKERHUB_TOKEN }}
+          Dockerfile_name:distrolessnodeapp
+          Dockerhub_repo:nodeapp
+
+      
