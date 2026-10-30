@@ -16,7 +16,7 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v8
         with:
           args: >
-            -Dsonar.projectKey=NodeAPP
+            -Dsonar.projectKey=nodeapptest
             -Dsonar.sources=.
             -Dsonar.host.url=${{ vars.SONAR_HOST_URL }}
             -Dsonar.token=${{ secrets.SONAR_TOKEN }}
