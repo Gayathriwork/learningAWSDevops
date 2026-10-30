@@ -35,7 +35,7 @@ jobs:
       - name: clone a code
         uses: actions/checkout@v7
       - name: Login build and push to dockerhub
-        uses: Gayathriwork/learningAWSDevops/.github/actions/docker-build-push@main
+        uses: karthipv-07/RevampBatch08/.github/actions/docker-build-push@main
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
