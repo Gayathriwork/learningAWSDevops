@@ -37,9 +37,9 @@ jobs:
       - name: Login build and push to dockerhub
         uses: Gayathriwork/learningAWSDevops/.github/actions/docker-build-push@main
         with:
-          username:${{ vars.DOCKERHUB_USERNAME }}
-          password:${{ secrets.DOCKERHUB_TOKEN }}
-          Dockerfile_name:distrolessnodeapp
-          Dockerhub_repo:nodeapp
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          Dockerfile_name: distrolessnodeapp
+          Dockerhub_repo: nodeapp
 
       
