@@ -1,11 +1,16 @@
 name: CI pipeline
 
 on:
+  push:
+    branches: ["main"]
+  pull_request: 
+    branches: ["main"]
   workflow_dispatch: 
 
 jobs:
   sonarqube:
     runs-on: mac
+    if: github.event_name == 'pull_request'
 
     steps:
       - name: code clone
@@ -23,7 +28,8 @@ jobs:
             
   Dockerimagebuild:
     runs-on: mac
-    needs: sonarqube
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    environment: ${{  github.ref_name == 'main' && 'prod' || 'dev' }}
 
     steps:
       - name: clone a code
