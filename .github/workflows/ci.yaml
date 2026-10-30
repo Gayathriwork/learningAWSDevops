@@ -23,6 +23,7 @@ jobs:
             
   Dockerimagebuild:
     runs-on: mac
+    needs: sonarqube
 
     steps:
       - name: clone a code
