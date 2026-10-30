@@ -1,0 +1,35 @@
+name: Docker build and Push
+
+inputs:
+  username:
+    description: Dockerhub username
+    required: true
+  password:
+    description: Dockerhub password
+    required: true
+  Dockerfile_name:
+    description: Dockerfile name
+    required: true
+  Dockerhub_repo:
+    description: Dockerhub repo name
+    reuired: true
+runs:
+  using: "composite"
+
+  steps:
+    - name: Dockerhub login
+      uses: actions/checkout@v7
+      with:
+        username: ${{ inputs.username }}
+        password: ${{ inputs.password }}
+        
+    - name: Docker image build
+        shell: bash
+        run: docker build -f ${{ inputs.Dockerfile_name }} -t dockerfile .
+        
+    - name: Tag and push a Docker image
+        shell: bash
+        run: |
+          SHORT_SHA=${GITHUB_SHA::7}
+          docker tag distrolessnodeapp ${{ inputs.username}}/${{ inputs.Dockerhub_repo }}:$SHORT_SHA
+          docker push ${{ inputs.username }}/${{ inputs.Dockerhub_repo }}:$SHORT_SHA
