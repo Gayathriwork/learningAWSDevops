@@ -12,24 +12,24 @@ inputs:
     required: true
   Dockerhub_repo:
     description: Dockerhub repo name
-    reuired: true
+    required: true
 runs:
   using: "composite"
 
   steps:
     - name: Dockerhub login
-      uses: actions/checkout@v7
+      uses: docker/login-action@v3
       with:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         
     - name: Docker image build
-        shell: bash
-        run: docker build -f ${{ inputs.Dockerfile_name }} -t dockerfile .
+      shell: bash
+      run: docker build -f ${{ inputs.Dockerfile_name }} -t dockerfile .
         
     - name: Tag and push a Docker image
-        shell: bash
-        run: |
+      shell: bash
+      run: |
           SHORT_SHA=${GITHUB_SHA::7}
           docker tag distrolessnodeapp ${{ inputs.username}}/${{ inputs.Dockerhub_repo }}:$SHORT_SHA
           docker push ${{ inputs.username }}/${{ inputs.Dockerhub_repo }}:$SHORT_SHA
